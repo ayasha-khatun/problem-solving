@@ -69,3 +69,25 @@ function curry(fn) {
 const add = curry((a, b) => a + b);
 
 console.log(add(2)(3));
+
+// Memoize a Function
+
+
+function memoize(fn) {
+  const cache = {};
+
+  return function (arg) {
+    if (arg in cache) {
+      return cache[arg];
+    }
+
+    const result = fn(arg);
+    cache[arg] = result;
+    return result;
+  };
+}
+
+const memoAdd = memoize(n => n + 10);
+
+console.log(memoAdd(5));
+console.log(memoAdd(5)); 
