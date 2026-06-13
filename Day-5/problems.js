@@ -31,23 +31,33 @@ function fibonacci(n) {
 console.log(fibonacci(6))
 
 // Create a Counter with Closure 
+function makeCounter() {
+  let count = 0;
 
+  return {
+    increment() {
+      count++;
+    },
 
+    decrement() {
+      count--;
+    },
 
-
-// Curry a Function 
-
-function curry(fn) {
-  return function (a) {
-    return function (b) {
-      return fn(a, b);
-    };
+    getCount() {
+      return count;
+    }
   };
 }
 
-const add = curry((a, b) => a + b);
+const c = makeCounter();
 
-console.log(add(2)(3)); 
+c.increment();
+c.increment();
+
+console.log(c.getCount());
+
+
+
 
 
 // Memoize a Function
