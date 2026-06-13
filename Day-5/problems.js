@@ -57,27 +57,15 @@ c.increment();
 console.log(c.getCount());
 
 
-
-
-
-// Memoize a Function
-
-
-function memoize(fn) {
-  const cache = {};
-
-  return function (arg) {
-    if (arg in cache) {
-      return cache[arg];
-    }
-
-    const result = fn(arg);
-    cache[arg] = result;
-    return result;
+//  Curry a Function
+function curry(fn) {
+  return function (a) {
+    return function (b) {
+      return fn(a, b);
+    };
   };
 }
 
-const memoAdd = memoize(n => n + 10);
+const add = curry((a, b) => a + b);
 
-console.log(memoAdd(5));
-console.log(memoAdd(5)); 
+console.log(add(2)(3));
