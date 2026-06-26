@@ -85,3 +85,77 @@ console.log(findMissing([1, 2, 4, 5], 5));
 console.log(findMissing([2, 3, 4, 5], 5));    
 console.log(findMissing([1, 2, 3, 5], 5));      
 console.log(findMissing([1, 3, 4, 5, 6], 6));   
+
+
+// Problem 44: Valid Parentheses  [Medium]
+// Description: Write a function isValidParentheses(str) that returns true if the string has valid, balanced parentheses, brackets, and braces.
+// Example:
+// Input: '()[]{}'  → Output: trueInput: '([)]'    → Output: false
+// Hint: Use a stack (array). Push opening brackets, pop and compare for closing ones.
+
+function isValidParentheses(str) {
+  const stack = [];
+  const pairs = {
+    ')': '(',
+    ']': '[',
+    '}': '{'
+  };
+
+  for (let char of str) {
+    if (char === '(' || char === '[' || char === '{') {
+      stack.push(char);
+    } else if (char === ')' || char === ']' || char === '}') {
+      if (stack.pop() !== pairs[char]) {
+        return false;
+      }
+    }
+  }
+
+  return stack.length === 0;
+}
+
+console.log(isValidParentheses("()[]{}"));
+console.log(isValidParentheses("([)]"));
+console.log(isValidParentheses("{[]}"));
+console.log(isValidParentheses("((("));
+console.log(isValidParentheses(""));
+
+
+// Problem 45: Binary Search  [Medium]
+// Description: Write a function binarySearch(arr, target) that searches a sorted array and returns the index of the target, or -1 if not found.
+// Example:
+// Input: [1,3,5,7,9], target=7  → Output: 3
+// Hint: Use left and right pointers; check the middle element each iteration.
+
+function binarySearch(arr, target) {
+  let left = 0;
+  let right = arr.length - 1;
+
+  while (left <= right) {
+    // মাঝের index বের করা
+    let mid = Math.floor((left + right) / 2);
+
+    // target পাওয়া গেলে index return
+    if (arr[mid] === target) {
+      return mid;
+    }
+
+    // target বড় হলে ডান পাশে search
+    if (arr[mid] < target) {
+      left = mid + 1;
+    }
+    // target ছোট হলে বাম পাশে search
+    else {
+      right = mid - 1;
+    }
+  }
+
+  // target না পাওয়া গেলে
+  return -1;
+}
+
+console.log(binarySearch([1, 3, 5, 7, 9], 7)); 
+console.log(binarySearch([1, 3, 5, 7, 9], 5)); 
+console.log(binarySearch([1, 3, 5, 7, 9], 1)); 
+console.log(binarySearch([1, 3, 5, 7, 9], 9)); 
+console.log(binarySearch([1, 3, 5, 7, 9], 8)); 
