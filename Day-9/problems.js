@@ -132,25 +132,24 @@ function binarySearch(arr, target) {
   let right = arr.length - 1;
 
   while (left <= right) {
-    // মাঝের index বের করা
+   
     let mid = Math.floor((left + right) / 2);
 
-    // target পাওয়া গেলে index return
+  
     if (arr[mid] === target) {
       return mid;
     }
 
-    // target বড় হলে ডান পাশে search
+   
     if (arr[mid] < target) {
       left = mid + 1;
     }
-    // target ছোট হলে বাম পাশে search
+    
     else {
       right = mid - 1;
     }
   }
 
-  // target না পাওয়া গেলে
   return -1;
 }
 
